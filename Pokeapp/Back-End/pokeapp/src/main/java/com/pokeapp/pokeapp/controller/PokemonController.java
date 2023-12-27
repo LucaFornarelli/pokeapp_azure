@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/pokemon")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200/")
 public class PokemonController {
 
     private final PokemonService pokemonService;
