@@ -1,7 +1,12 @@
 <h1>PokeResult</h1>
-<p>Le Pokémon est :</p>
+<h1>Résultat</h1>
 <div *ngIf="pokemonData">
-  <pre>{{ pokemonData | json }}</pre>
-</div>
+  <p>Pokémon n° {{pokemonData.id}}</p>
+  <p style="text-transform: capitalize;">{{ pokemonData.name }}</p>
 
-<button routerLink="">Retourner à l'accueil</button>
+  <img [src]="'assets/images/' + pokemonData.id + '.png'"/>
+
+</div>
+<div *ngIf="!pokemonData">
+  <p>Aucune information sur le Pokémon.</p>
+</div>

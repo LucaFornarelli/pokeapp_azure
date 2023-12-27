@@ -1,33 +1,39 @@
 import { Component } from "@angular/core";
 import { PokemonService } from '../services/pokemon.service';
 import { ApiConfigService } from '../services/api-config.service';
+import { Router } from '@angular/router';
 
-@Component({ templateUrl: 'home.component.html'}) export class HomeComponent {
+@Component({ templateUrl: 'home.component.html' }) export class HomeComponent {
   pokemonData: any;
 
-  constructor(private pokemonService: PokemonService, private apiConfigService: ApiConfigService) { }
+  constructor(private pokemonService: PokemonService, private apiConfigService: ApiConfigService, private router: Router) { }
 
   getRandomPokemon() {
-    // Générer un nom de Pokemon aléatoire (à adapter selon votre logique)
-    const randomPokemonName = "pikachu"; // Remplacez ceci par votre logique de génération aléatoire
-    alert(this.pokemonService.getPokemonData(randomPokemonName));
-  
-    this.pokemonService.getPokemonData(randomPokemonName).subscribe(
+
+    //PokemonAléatoire 
+
+    var idPokemon = Math.floor(Math.random() * 151) + 1;
+
+    //Chercher les infos
+
+    this.pokemonService.getPokemonData("" + idPokemon).subscribe(
       data => {
         this.pokemonData = data;
-        console.log('Réponse de l\'API:', data);
+        console.log(data);
+        sessionStorage.setItem('randomPokemonData', JSON.stringify(data));
+        this.router.navigate(['/result']);
       },
       error => {
-        console.error('BLOUPAX Erreur lors de l\'appel à l\'API:', error);
+        console.log(error);
       }
     );
-  }
-  
-    
-  
 
-  logApiUrl() {
-    const apiUrl = this.apiConfigService.getApiUrl();
-    console.log('URL de l\'API:', apiUrl);
+
   }
+
+
+
+
 }
+
+

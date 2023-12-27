@@ -5,20 +5,25 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 @Configuration
 public class CorsConfig {
+        @Bean
+    public WebMvcConfigurer corsConfigurer()
+    {
+        String[] allowDomains = new String[2];
+        allowDomains[0] = "http://localhost:4200";
+        allowDomains[1] = "http://localhost:8080";
 
-    @Bean
-    public CorsFilter corsFilter() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        config.addAllowedOrigin("*");  // Autorise toutes les origines, vous pouvez spécifier les origines nécessaires
-        config.addAllowedHeader("*");  // Autorise tous les en-têtes
-        config.addAllowedMethod("*");  // Autorise toutes les méthodes (GET, POST, etc.)
-        source.registerCorsConfiguration("/**", config);
-        return new CorsFilter(source);
+        System.out.println("CORS configuration....");
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**").allowedOrigins(allowDomains);
+            }
+        };
     }
 }

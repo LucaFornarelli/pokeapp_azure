@@ -1,7 +1,5 @@
 <h1>PokeHome</h1>
 
 <p>Afficher un Pokémon aléatoire :</p>
-<button (click)="getRandomPokemon()" routerLink="/result">Afficher un Pokemon aléatoire</button>
+<button (click)="getRandomPokemon()">Afficher un Pokemon aléatoire</button>
     <app-resultat *ngIf="pokemonData" [pokemonData]="pokemonData"></app-resultat>
-
-    <button (click)="logApiUrl()">Afficher l'URL de l'API</button>
