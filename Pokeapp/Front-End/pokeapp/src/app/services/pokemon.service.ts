@@ -11,7 +11,7 @@ export class PokemonService {
   constructor(private http: HttpClient, private apiConfigService: ApiConfigService) {}
 
   getPokemonData(pokemonName: string): Observable<any> {
-    const apiUrl = `${this.apiConfigService.getApiUrl()}/api/pokemon/${pokemonName}`;
+    const apiUrl = `${this.apiConfigService.getApiUrl()}/api/v2/pokemon/${pokemonName}`;
     return this.http.get(apiUrl);
   }
 }

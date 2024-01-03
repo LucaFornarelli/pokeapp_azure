@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ApiConfigService {
-  private apiUrl = 'http://localhost:8080'; // Remplacez par l'URL de votre API
+  private apiUrl = 'https://pokeapi.co'; // Remplacez par l'URL de votre API
 
   getApiUrl(): string {
     return this.apiUrl;
